@@ -34,7 +34,7 @@ const App: React.FC = ()=>{
   useEffect(() => {
 
     // filtering out the matches
-    const cityObj = data.filter( (item) => {
+    const cityObj:CityData[] = data.filter( (item) => {
       if(item.city === city){
         return item;
       }
@@ -42,7 +42,7 @@ const App: React.FC = ()=>{
 
     // if there exist at least 1 match, using the first one
     if(cityObj){
-      let url:string = 'https://api.open-meteo.com/v1/forecast?latitude=' + cityObj[0]["lat"] + '&longitude=' + cityObj[0]["lng"] + '&daily=weather_code,temperature_2m_max,temperature_2m_min&forecast_days=1';
+      let url:string = 'https://api.open-meteo.com/v1/forecast?latitude=' + cityObj[0].lat + '&longitude=' + cityObj[0].lng + '&daily=weather_code,temperature_2m_max,temperature_2m_min&forecast_days=1';
       
       
     }
@@ -58,6 +58,7 @@ const App: React.FC = ()=>{
 
     // showing previous op
     setCity(c);
+    console.log(city)
 
   }
 
