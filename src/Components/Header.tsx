@@ -8,6 +8,8 @@ import InputLabel from '@mui/material/InputLabel';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
 // import { SelectChangeEvent } from "@mui/material";
 
 
@@ -28,9 +30,10 @@ const Header: React.FC<PropData> = ({city, handleClick})=>{
 
   return (
     <>
+        <Container maxWidth="md">
         <Box sx={{ minWidth: 120 }}>
 
-            <h1>Weather kaisa hai?</h1>
+            <Typography variant="h3" component="h5">Weather kaisa hai?</Typography>
             <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">City</InputLabel>
             <Select onChange={handleChange}>
@@ -46,6 +49,7 @@ const Header: React.FC<PropData> = ({city, handleClick})=>{
             </FormControl>
 
         </Box>
+        </Container>
     </>
   );
 }
