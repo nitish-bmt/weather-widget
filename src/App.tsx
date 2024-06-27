@@ -1,9 +1,10 @@
+// React imports
 import React from 'react';
 import {useState} from 'react';
 import {useEffect} from 'react';
 import './App.css';
 
-// components
+// Importing Components
 import Weather from './Components/Weather';
 import Header from './Components/Header';
 
@@ -15,7 +16,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import Box from '@mui/material/Box';
 
-// Interfaces
+// Importing Interfaces
 import {CityData} from './Interfaces/CityData';
 import {WeatherData} from './Interfaces/WeatherData';
 import {PropData} from './Interfaces/Header';
@@ -27,7 +28,7 @@ import data from './utils/in.json';
 import axios from "axios";
 
 
-
+// Default React functional component
 const App: React.FC = ()=>{
 
   const [city, setCity] = useState<string>('');

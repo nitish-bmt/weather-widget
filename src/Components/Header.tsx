@@ -1,3 +1,4 @@
+// React imports
 import React from 'react';
 // import {useState} from 'react';
 
@@ -17,12 +18,15 @@ import Typography from '@mui/material/Typography';
 import {CityData} from '../Interfaces/CityData';
 import {PropData} from '../Interfaces/Header';
 
+// importing json file
 import data from '../utils/in.json';
 
-
+// Default React functional component
 const Header: React.FC<PropData> = ({city, handleClick})=>{
 
   let currentSelection: string = '';
+
+  // function to handle change in dropdown
   const handleChange = (event: SelectChangeEvent) =>{
     currentSelection = event.target.value as string;
     console.log(currentSelection)
