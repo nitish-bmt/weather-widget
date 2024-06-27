@@ -19,7 +19,15 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
 // Default React functional component
-const Weather: React.FC<WeatherData> = ({code, min, max})=>{
+const Weather: React.FC<WeatherData> = (props: WeatherData)=>{
+
+    const avgTemp:number|null = useMemo( ()=>{
+        if(props.min && props.max){
+            return (props.min+props.max)/2;
+        }
+        return null;
+    }, [props.min, props.max]);
+
     return(
         <>
             <Container maxWidth="sm">
@@ -27,9 +35,10 @@ const Weather: React.FC<WeatherData> = ({code, min, max})=>{
                     Weather bohot kharab hai!
                     <Typography variant="h6" component="h5">
                         <p>
-                            Weather code: {code}        <br/>
-                            Minimum temprature: {min}   <br/>
-                            Minimum temprature: {max}   <br/>
+                            Weather code: {props.code}        <br/>
+                            Minimum temprature: {props.min}   <br/>
+                            Minimum temprature: {props.max}   <br/>
+                            Average temprature: {avgTemp}   <br/>
                         </p>
                     </Typography>
                 </Typography>
