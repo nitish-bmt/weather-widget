@@ -43,18 +43,34 @@ const Weather: React.FC<{city: string|null}> = ({city}:{city: string|null})=>{
     
         let url:string = 'https://api.open-meteo.com/v1/forecast?latitude=' + selectedCity.lat + '&longitude=' + selectedCity.lng + '&daily=weather_code,temperature_2m_max,temperature_2m_min&forecast_days=1';
         
-        axios.get(url)
-            .then((response)=>{
-                const w:WeatherData = {
-                    code: response.data.daily.weather_code,
-                    min: response.data.daily.temperature_2m_min,
-                    max: response.data.daily.temperature_2m_max
-                }
-                setWeather(w);
-            })
-            .catch((error)=>{
-                console.log(error);
-            });
+        // axios.get(url)
+        //     .then((response)=>{
+        //         const w:WeatherData = {
+        //             code: response.data.daily.weather_code,
+        //             min: response.data.daily.temperature_2m_min,
+        //             max: response.data.daily.temperature_2m_max
+        //         }
+        //         setWeather(w);
+        //     })
+        //     .catch((error)=>{
+        //         console.log(error);
+        //     });
+        try {
+            const response = await axios.get(url);
+            // setError(null);
+            const t: WeatherData = {
+                code: response.data.daily.weather_code,
+                min: response.data.daily.temperature_2m_min,
+                max: response.data.daily.temperature_2m_max
+            }
+            setWeather(t);
+        } catch (error: any) {
+            console.log(error);
+        // TODO: Handle specific errors based on API response and give definitive type above
+        // setError(error.response.data.reason);
+        } finally {
+        // setLoading(false);
+        }
         
         }
     }, [city, weather]);
