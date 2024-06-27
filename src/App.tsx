@@ -1,5 +1,7 @@
 // React imports
 import React from 'react';
+
+// React Hook Imports
 import {useState} from 'react';
 import {useEffect} from 'react';
 import './App.css';
@@ -9,12 +11,8 @@ import Weather from './Components/Weather';
 import Header from './Components/Header';
 
 // mui imports
-import Button from '@mui/material/Button';
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
-import Box from '@mui/material/Box';
+import {Select, Button, Box, FormControl, InputLabel} from './Components/Common/CommonMUIComponents';
+import { SelectChangeEvent } from '@mui/material/Select';
 
 // Importing Interfaces
 import {CityData} from './Interfaces/CityData';
@@ -58,10 +56,6 @@ const App: React.FC = ()=>{
             setWeatherCode(response.data.daily.weather_code);
             setMin(response.data.daily.temperature_2m_min);
             setMax(response.data.daily.temperature_2m_max);
-
-            console.log(response.data.daily.weather_code);
-            console.log(response.data.daily.temperature_2m_min);
-            console.log(response.data.daily.temperature_2m_max);
         })
         .catch((error)=>{
           console.log(error);
