@@ -1,4 +1,4 @@
 export interface PropData{
     city: string|null;
-    setCity(c:string): void;
+    setCity(c:string|null): void;
 }

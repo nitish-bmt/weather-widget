@@ -24,12 +24,9 @@ const Header: React.FC<PropData> = (props:PropData)=>{
   const handleChange = (event: SelectChangeEvent) =>{
     currentSelection = event.target.value as string;
   }
-  const handleClick = (c: string):void => {
+  const handleClick = ():void => {
     // updating city
-    useEffect( ()=>{
-      props.setCity(c);
-    }, [props.city]);
-
+    props.setCity(currentSelection);
   }
 
   return (
@@ -49,7 +46,7 @@ const Header: React.FC<PropData> = (props:PropData)=>{
                 }
             </Select>
 
-            <Button variant="contained" onClick={()=>{handleClick(currentSelection)}}>Check Weather</Button>
+            <Button variant="contained" onClick={handleClick}>Check Weather</Button>
             </FormControl>
 
         </Box>
