@@ -1,26 +1,35 @@
 // React imports
 import React from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 // import { SelectChangeEvent } from "@mui/material";
 import {SelectChangeEvent} from '@mui/material/Select';
 import {Button, FormControl, InputLabel, Select, MenuItem, Container, Box, Typography} from './Common/CommonMUIComponents'
 
-// importing interfaces
-import {CityData} from '../Interfaces/CityData';
-import {PropData} from '../Interfaces/Header';
-
 // importing json file
 import data from '../utils/in.json';
 
+// importing interfaces
+import {CityData} from '../Interfaces/CityData';
+import { PropData } from '../Interfaces/Header';
+
 // Default React functional component
-const Header: React.FC<PropData> = ({city, handleClick})=>{
+const Header: React.FC<PropData> = (props:PropData)=>{
 
   let currentSelection: string = '';
+  
 
   // function to handle change in dropdown
   const handleChange = (event: SelectChangeEvent) =>{
     currentSelection = event.target.value as string;
-    console.log(currentSelection)
+  }
+  const handleClick = (c: string):void => {
+    // updating city
+    useEffect( ()=>{
+      props.setCity(c);
+    }, [props.city]);
+
   }
 
   return (
