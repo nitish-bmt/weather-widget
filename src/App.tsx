@@ -16,7 +16,8 @@ import MenuItem from '@mui/material/MenuItem';
 import Box from '@mui/material/Box';
 
 // Interfaces
-import {CityData} from './Interfaces/cityData';
+import {CityData} from './Interfaces/CityData';
+import {WeatherData} from './Interfaces/WeatherData';
 import {PropData} from './Interfaces/Header';
 
 // city data file
@@ -30,20 +31,40 @@ import axios from "axios";
 const App: React.FC = ()=>{
 
   const [city, setCity] = useState<string>('');
-
+  const [weatherCode, setWeatherCode] = useState<number|null>(null);
+  const [min, setMin] = useState<number|null>(null);
+  const [max, setMax] = useState<number|null>(null);
   useEffect(() => {
 
     // filtering out the matches
-    const cityObj:CityData[] = data.filter( (item) => {
-      if(item.city === city){
-        return item;
-      }
-    });
+    // const cityObj:CityData[] = data.filter( (item) => {
+    //   if(item.city === city){
+    //     return item;
+    //   }
+    // });
+    const selectedCity:CityData|null = data.find( c => c.city === city ) || null;
 
     // if there exist at least 1 match, using the first one
-    if(cityObj){
-      let url:string = 'https://api.open-meteo.com/v1/forecast?latitude=' + cityObj[0].lat + '&longitude=' + cityObj[0].lng + '&daily=weather_code,temperature_2m_max,temperature_2m_min&forecast_days=1';
+    if(selectedCity){
       
+      console.log(selectedCity.lng);
+      console.log(selectedCity.lat);
+
+      let url:string = 'https://api.open-meteo.com/v1/forecast?latitude=' + selectedCity.lat + '&longitude=' + selectedCity.lng + '&daily=weather_code,temperature_2m_max,temperature_2m_min&forecast_days=1';
+      
+      axios.get(url)
+        .then((response)=>{
+            setWeatherCode(response.data.daily.weather_code);
+            setMin(response.data.daily.temperature_2m_min);
+            setMax(response.data.daily.temperature_2m_max);
+
+            console.log(response.data.daily.weather_code);
+            console.log(response.data.daily.temperature_2m_min);
+            console.log(response.data.daily.temperature_2m_max);
+        })
+        .catch((error)=>{
+          console.log(error);
+        });
       
     }
 
@@ -65,7 +86,7 @@ const App: React.FC = ()=>{
   return (
     <>
       <Header city={city} handleClick={handleClick} />
-      <Weather/>
+      <Weather code={weatherCode} min={min} max={max}/>
     </>
   );
 }

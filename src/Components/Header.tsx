@@ -12,7 +12,7 @@ import Box from '@mui/material/Box';
 
 
 // importing interfaces
-import {CityData} from '../Interfaces/cityData';
+import {CityData} from '../Interfaces/CityData';
 import {PropData} from '../Interfaces/Header';
 
 import data from '../utils/in.json';
